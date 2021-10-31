@@ -9,8 +9,7 @@ from comtypes import CLSCTX_ALL
 from pycaw.pycaw import AudioUtilities, IAudioEndpointVolume
 
 devices = AudioUtilities.GetSpeakers()
-interface = devices.Activate(
-    IAudioEndpointVolume._iid_, CLSCTX_ALL, None)
+interface = devices.Activate(IAudioEndpointVolume._iid_, CLSCTX_ALL, None)
 volume = cast(interface, POINTER(IAudioEndpointVolume))
 volume.GetMute()
 volume.GetMasterVolumeLevel()
@@ -25,7 +24,7 @@ volPer = 0
 wcam, hcam = 640, 480
 
 
-cap = cv2.VideoCapture(1)
+cap = cv2.VideoCapture(0)
 cap.set(3, wcam)
 cap.set(4, hcam)
 pTime = 0
@@ -77,7 +76,7 @@ while True:
 
     cv2.imshow("Capture", img)
 
-    if cv2.waitKey(1) & 0xFF == ord('q'):break    
+    if cv2.waitKey(1) & 0xFF == ord('q'):break
 
 cap.release()
 cv2.destroyAllWindows()
